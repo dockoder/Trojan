@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{F24BE00F-AE1E-4EC7-A953-3632386A3788}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="WinNTCom.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="RTO.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="WinNTCom">
+			<MSBuild Projects="WinNTCom.dproj"/>
+		</Target>
+		<Target Name="WinNTCom:Clean">
+			<MSBuild Targets="Clean" Projects="WinNTCom.dproj"/>
+		</Target>
+		<Target Name="WinNTCom:Make">
+			<MSBuild Targets="Make" Projects="WinNTCom.dproj"/>
+		</Target>
+		<Target Name="RTO">
+			<MSBuild Projects="RTO.dproj"/>
+		</Target>
+		<Target Name="RTO:Clean">
+			<MSBuild Targets="Clean" Projects="RTO.dproj"/>
+		</Target>
+		<Target Name="RTO:Make">
+			<MSBuild Targets="Make" Projects="RTO.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="WinNTCom;RTO"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="WinNTCom:Clean;RTO:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="WinNTCom:Make;RTO:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
